@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Rental Service
+ * This Service deals with rentals data
  */
 @Service
 public class RentalService {
