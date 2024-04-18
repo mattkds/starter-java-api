@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 /**
- * Rental Service
+ * Rental Service Class
  * This Service deals with rentals data
  */
 @Service
