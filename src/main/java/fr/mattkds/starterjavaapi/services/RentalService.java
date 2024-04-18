@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
  * Rental Service Class
  * This Service deals with rentals data
  * New line comment
- * test
- * test of local work
  */
 @Service
 public class RentalService {
