@@ -1,5 +1,6 @@
 package fr.mattkds.starterjavaapi.services;
 
+import fr.mattkds.starterjavaapi.controllers.dto.FilmStats;
 import fr.mattkds.starterjavaapi.domains.Rental;
 import fr.mattkds.starterjavaapi.repository.RentalRepository;
 import fr.mattkds.starterjavaapi.specification.RentalSpecification;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Rental Service Class
@@ -35,6 +38,10 @@ public class RentalService {
         }
         Pageable page = PageRequest.of(pageNumber, pageSize, Sort.Direction.fromString(sortDir), sortBy);
         return rentalRepository.findAll(specification, page);
+    }
+
+    public List<FilmStats> getStats() {
+        return this.rentalRepository.getFilmStatisticsByRental();
     }
 }
 
