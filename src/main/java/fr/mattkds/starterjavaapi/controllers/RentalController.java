@@ -1,5 +1,6 @@
 package fr.mattkds.starterjavaapi.controllers;
 
+import fr.mattkds.starterjavaapi.controllers.dto.FilmStats;
 import fr.mattkds.starterjavaapi.domains.Rental;
 import fr.mattkds.starterjavaapi.services.RentalService;
 import org.springframework.data.domain.Page;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/rentals")
@@ -39,6 +42,12 @@ public class RentalController {
     ) {
         Page<Rental> rentals = rentalService.getAllRentals(pageNumber, pageSize, sortBy, sortDir, customerId, filmId);
         return ResponseEntity.ok(rentals);
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<List<FilmStats>> getFilmStatisticsByRental() {
+        List<FilmStats> statistics = rentalService.getStats();
+        return ResponseEntity.ok(statistics);
     }
 }
 
