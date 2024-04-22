@@ -1,27 +1,30 @@
 package fr.mattkds.starterjavaapi.services;
 
-import fr.mattkds.starterjavaapi.domains.Film;
+import fr.mattkds.starterjavaapi.controllers.dto.FilmStats;
 import fr.mattkds.starterjavaapi.domains.Rental;
 import fr.mattkds.starterjavaapi.repository.RentalRepository;
-import fr.mattkds.starterjavaapi.specification.FilmSpecification;
 import fr.mattkds.starterjavaapi.specification.RentalSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+/**
+ * Rental Service Class
+ * This Service deals with rentals data
+ * New line comment
+ */
 @Service
 public class RentalService {
 
-    @Autowired
-    private RentalRepository rentalRepository;
+    private final RentalRepository rentalRepository;
 
-    public List<Rental> getAllRentals() {
-        return rentalRepository.findAll();
+    public RentalService(RentalRepository rentalRepository) {
+        this.rentalRepository = rentalRepository;
     }
 
     public Page<Rental> getAllRentals(int pageNumber, int pageSize, String sortBy, String sortDir, Integer customerId, Integer filmId) {
@@ -35,6 +38,10 @@ public class RentalService {
         }
         Pageable page = PageRequest.of(pageNumber, pageSize, Sort.Direction.fromString(sortDir), sortBy);
         return rentalRepository.findAll(specification, page);
+    }
+
+    public List<FilmStats> getStats() {
+        return this.rentalRepository.getFilmStatisticsByRental();
     }
 }
 
